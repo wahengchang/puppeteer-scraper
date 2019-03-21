@@ -1,4 +1,4 @@
-const {onlyCharDigit, urlFileName} = require('../string')
+const {onlyCharDigit, urlFileName} = require('../../lib/string')
 // const {resourceType} = require('./const')
 
 class Interceptor {
@@ -66,7 +66,7 @@ class Interceptor {
 
     if(downloadResourceType.length <=0 || downloadResourceType.find(type => type === resourceType)) {
       response.buffer().then( (buffer) => {
-        const fileName = urlFileName(url)
+        const fileName = urlFileName(url) || `${new Date().getTime()}.${resourceType}`
 
         reqRoot[reqId]  = {
           ...reqRoot[reqId],

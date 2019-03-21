@@ -16,6 +16,7 @@ const domain = urlDomain(url)
 module.exports = {
   name,
   url,
+  isDeletTempDir: true,
   // isDownloadResource: true,
   // downloadResourceType: ['image'],
   // afterPageLoad: scrollDown,
@@ -24,7 +25,5 @@ module.exports = {
 
     const imageUrl = $('.fullImageLink').find('a').attr('href')
     await downloader.toFile(imageUrl,`bigimage/${name}.jpg`)
-
-    // await childHelper.execPromise(`rm -r ./${name}`)
   },
 }

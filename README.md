@@ -22,6 +22,14 @@ const puppeteer = require('puppeteer');
 $ node script/generateReport.js --meta='./1552988325707-temp/meta.json' --output='./1552988325707-temp/report.json'
 ```
 
+## Getting all cookies
+
+return all cookies, inclueded httpOnly 
+
+```
+const cookies = await page._client.send('Network.getAllCookies');
+```
+
 
 ## Reference 
  - [https://blog.kowalczyk.info/article/ea07db1b9bff415ab180b0525f3898f6/advanced-web-spidering-with-puppeteer.html](https://blog.kowalczyk.info/article/ea07db1b9bff415ab180b0525f3898f6/advanced-web-spidering-with-puppeteer.html)

@@ -2,11 +2,11 @@ const {scrollDown} = require('./lib/browserHelper')
 
 module.exports = {
   name: `yahoo-${new Date().getTime()}`,
-  url: 'https://tw.mall.yahoo.com/',
+  url: 'https://login.yahoo.com/',
   isDownloadResource: true,
-  downloadResourceType: ['script'],
+  downloadResourceType: [],
   afterPageLoad: scrollDown,
   afterHtmlLoad: async function(html){
-    console.log(html)
+    // console.log(html)
   },
 }
