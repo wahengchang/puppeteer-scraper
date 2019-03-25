@@ -1,21 +1,30 @@
+# Puppeter-scraper
+This is a repo of implemeneting a webs scraper, base on the amazing puppeeter.It comes with Chromium and runs “headless” by default. 
 
-## Ex 1
-```js
-const puppeteer = require('puppeteer');
-
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://example.com');
-  await page.screenshot({path: 'example.png'});
-
-  const html = await page.content();
-
-  require('fs').writeFileSync('page.html', html)
-
-  await browser.close();
-})();
+## Install 
 ```
+$ npm install 
+# or 
+$ yarn install 
+```
+
+## Preparing configuration
+
+creating yourown configuration to tell the scraper what to do.
+
+`./config`
+```js
+const {scrollDown} = require('./lib/browserHelper')
+
+module.exports = {
+  name: `yahoo-${new Date().getTime()}`,
+  url: 'https://yahoo.com/',
+  isDownloadResource: true,
+  }
+}
+
+```
+
 
 ## Generate Report
 ```

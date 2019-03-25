@@ -14,6 +14,7 @@
       name: projectName,
       isDeletTempDir,
       isDownloadResource,
+      isDownloadCookies,
       downloadResourceType,
       beforeGotoPage,
       afterPageLoad,
@@ -27,7 +28,13 @@
   try {
     const tp = uniqueName()
     const dir = `${projectName}`
-    fs.mkdirSync(`./${dir}`)
+    try {
+      fs.mkdirSync(`./${dir}`)
+    }
+    catch(err){
+      console.log('[ERROR] file existed, going to remove')
+      await childHelper.execPromise(`rm -R ./${dir}`)
+    }
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -57,10 +64,10 @@
     console.log('[INFO] created meta.json')
     await page.screenshot({path: `./${dir}/${tp}-screenshot.png`});
 
-    // const cookies = await page.cookies()
-
-    const cookies = await page._client.send('Network.getAllCookies');
-    fs.writeFileSync(`./${dir}/cookies.json`, JSON.stringify(cookies))
+    if(isDownloadCookies) {
+      const cookies = await page._client.send('Network.getAllCookies');
+      fs.writeFileSync(`./${dir}/cookies.json`, JSON.stringify(cookies))
+    }
 
     await browser.close();
     console.log('[INFO] done, browser closed')
