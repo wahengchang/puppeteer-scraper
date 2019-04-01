@@ -18,7 +18,8 @@
       downloadResourceType,
       beforeGotoPage,
       afterPageLoad,
-      afterHtmlLoad
+      afterHtmlLoad,
+      isReport
     } = config
 
   const uniqueName = () => {
@@ -71,6 +72,10 @@
 
     await browser.close();
     console.log('[INFO] done, browser closed')
+
+    if(isReport){
+      await childHelper.execPromise(`node script/generateReport.js --input='./${dir}/meta.json' --output='./${dir}/report.json'`)
+    }
 
     if(isDeletTempDir) {
       await childHelper.execPromise(`rm -r ./${dir}`)

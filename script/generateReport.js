@@ -9,6 +9,7 @@ const meta = require(`${__dirname}/../${INPUT_FILE}`)
 const keyList = Object.keys(meta)
 
 let flatMetaSize = 0
+let flatTotalSpendTime = 0
 const flatMeta = []
 for(const key of keyList) {
   flatMeta.push({
@@ -35,8 +36,9 @@ for(const type of resourceTypeList) {
     return _total + (spendTime);
   }, 0);
 
-  reportList.push({type, totalSize, file: fileList})
+  reportList.push({type, totalSize, totalSpendTime, file: fileList})
   flatMetaSize += totalSize
+  flatTotalSpendTime += totalSpendTime
 }
 
 console.log(`[INFO] Total Traffic: ${flatMeta.length} file, ${(flatMetaSize/1024)}mb`)
@@ -49,7 +51,7 @@ reportList.forEach( item => {
 })
 
 const reportResult = {
-  totalSpendTime,
+  totalSpendTime: flatTotalSpendTime,
   totalFile: flatMeta.length,
   totalSize: flatMetaSize, //kb
   reportList,
