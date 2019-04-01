@@ -74,7 +74,7 @@
     console.log('[INFO] done, browser closed')
 
     if(isReport){
-      await childHelper.execPromise(`node script/generateReport.js --input='./${dir}/meta.json' --output='./${dir}/report.json'`)
+      await childHelper.execPromise(`node script/generateReport.js --meta='./${dir}/meta.json' --output='./${dir}/report.json'`)
     }
 
     if(isDeletTempDir) {

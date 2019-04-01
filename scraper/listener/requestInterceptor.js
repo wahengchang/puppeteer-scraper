@@ -4,7 +4,7 @@ const {onlyCharDigit, urlFileName} = require('../../lib/string')
 class Interceptor {
   constructor(config= {}){
     const {isDownloadResource = false, dir = '', downloadResourceType = []} = config
-
+    this.order = 0
     this.reqIdList = []
     this.reqObj = {}
     this.isDownloadResource = isDownloadResource
@@ -22,6 +22,7 @@ class Interceptor {
 
     this.reqIdList.push(reqId);
     this.reqObj[reqId] = {
+      order: this.order,
       url,
       resourceType,
       request: {method, headers},
@@ -31,6 +32,7 @@ class Interceptor {
       size: null,
       spendTime: null
     }
+    this.order +=1 
   }
 
   saveReponse(response, cb) {
